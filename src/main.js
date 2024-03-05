@@ -6,8 +6,8 @@ let config = {
     render: {
         pixelArt: true
     },
-    width: 800,
-    height: 600,
+    width: 1600,
+    height: 800,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },

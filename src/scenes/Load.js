@@ -21,7 +21,7 @@ class Load extends Phaser.Scene {
         //     frameHeight: 24
         // })
 
-        // this.load.image('scrolling-flesh', 'sprites/scrolling-flesh.png')
+        this.load.image('player', 'sprites/player.png')
 
 
         // load audio assets
