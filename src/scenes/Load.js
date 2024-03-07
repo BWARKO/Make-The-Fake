@@ -22,12 +22,15 @@ class Load extends Phaser.Scene {
         // })
 
         this.load.image('player', 'sprites/player.png')
-
+        this.load.image('bg', '')
 
         // load audio assets
-        // this.load.audio('music', ['audios/music.mp3'])
-
-
+        this.load.audio('bgm', 'audios/bgm.wav')
+        this.load.audio('walk', 'audios/walk.wav')
+        this.load.audio('blast', 'audios/blast.wav')
+        this.load.audio('death', 'audios/death.wav')
+        this.load.audio('ping', 'audios/ping.wav')
+        this.load.audio('heal', 'audios/heal.wav')
 
         // load font
         this.load.bitmapFont('gem', 'fonts/gem.png', 'fonts/gem.xml')
