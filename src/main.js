@@ -33,6 +33,7 @@ const game = new Phaser.Game(config)
 // define globals
 let w = game.config.width
 let h = game.config.height
+let PADDING = 50
 
 let cursors
 let spaceKey
