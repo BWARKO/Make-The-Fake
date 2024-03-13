@@ -5,8 +5,8 @@ class Title extends Phaser.Scene {
 
     create() {
         console.log('Title Screen')
-        this.titleText = this.add.bitmapText(w/2, h/3, 'gem', `GUARDIANS of\n    SUNSHINE`, 160).setOrigin(0.5).setTint(0x00FF00)
-        this.pressText = this.add.bitmapText(w - PADDING, h - PADDING, 'gem', `PRESS SPACE`, 80).setOrigin(1).setTint(0x00FF00).setAlpha(0)
+        this.add.image(w/2, h/2, 'title').setScale(6)
+        this.pressText = this.add.bitmapText(w - PADDING * 1.5, h - PADDING, 'gem', `PRESS SPACE`, 40).setOrigin(1).setTint(0x00FF00).setAlpha(0)
 
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
@@ -21,7 +21,7 @@ class Title extends Phaser.Scene {
 
         this.ping = this.sound.add('ping', { 
             mute: false,
-            volume: 0.5,
+            volume: 0.25,
             rate: 2,
         });
 

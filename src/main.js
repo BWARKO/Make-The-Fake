@@ -8,14 +8,21 @@
 // https://freesound.org/people/OwlStorm/sounds/404728/
 // https://freesound.org/people/MATRIXXX_/sounds/515783/
 // https://freesound.org/people/BloodPixelHero/sounds/580898/
+//
+// questions:
+// - clipping ramps
+// - add groups to physics instead of individual objects (less code)
+// - how to throw bomb, i.e. build animation with bomb or w/o?
+// - title screen lags, happens when i tab back in and out
+// - reset jump with bottom collision
 
 let config = {
     type: Phaser.AUTO,
     render: {
         pixelArt: true
     },
-    width: 1600,
-    height: 800,
+    width: 1200,
+    height: 600,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
@@ -33,7 +40,7 @@ const game = new Phaser.Game(config)
 // define globals
 let w = game.config.width
 let h = game.config.height
-let PADDING = 50
+let PADDING = 10
 
 let cursors
 let spaceKey

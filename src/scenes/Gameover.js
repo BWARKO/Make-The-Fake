@@ -6,18 +6,17 @@ class Gameover extends Phaser.Scene {
     create() {
         console.log('Gameover scene')
 
-        this.gameoverText = this.add.bitmapText(w/2, h/3, 'gem', `GAMEOVER`, 160).setOrigin(0.5).setTint(0x00FF00)
-        this.tempText = this.add.bitmapText(w/2, h/2 - 60, 'gem', `haha theres nothing here... or anywhere in this game yet!`, 20).setOrigin(0.5).setTint(0x00FF00)
+        this.gameoverText = this.add.bitmapText(w/2, h/2, 'gem', `YOU\nLOSE`, 160).setOrigin(0.5).setTint(0x00FF00)
 
-        this.pressText = this.add.bitmapText(w/2, h/2, 'gem', `PRESS SPACE TO RESTART`, 60).setOrigin(0.5).setTint(0x00FF00).setAlpha(0)
-        this.escText = this.add.bitmapText(0 + PADDING, 0 + PADDING, 'gem', `ESC TO TITLE`, 60).setTint(0x00FF00)
+        this.pressText = this.add.bitmapText(w/2, h - PADDING, 'gem', `PRESS SPACE TO RESTART`, 40).setOrigin(0.5, 1).setTint(0x00FF00).setAlpha(0)
+        this.escText = this.add.bitmapText(0 + PADDING*2, 0 + PADDING*2, 'gem', `ESC TO TITLE`, 20).setTint(0x00FF00).setAlpha(0)
 
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
 
         this.ping = this.sound.add('ping', { 
             mute: false,
-            volume: 0.5,
+            volume: 0.25,
             rate: 2,
         });
 
@@ -31,6 +30,8 @@ class Gameover extends Phaser.Scene {
         this.timer = this.time.addEvent({
             delay: 500,                
             callback: () => {
+                this.escText.setAlpha(1)
+
                 if (this.pressText.alpha > 0) {
                     this.pressText.setAlpha(0)
                 } else {
