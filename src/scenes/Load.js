@@ -22,6 +22,14 @@ class Load extends Phaser.Scene {
             frameWidth: 18,
             frameHeight: 23
         })
+        this.load.spritesheet('bee', 'sprites/bee.png', {
+            frameWidth: 49,
+            frameHeight: 37
+        })
+        this.load.spritesheet('bomb', 'sprites/bomb.png', {
+            frameWidth: 17,
+            frameHeight: 27
+        })
         this.load.spritesheet('sun', 'sprites/sun.png', {
             frameWidth: 34,
             frameHeight: 34
@@ -29,6 +37,10 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('fire', 'sprites/fire.png', {
             frameWidth: 41,
             frameHeight: 34
+        })
+        this.load.spritesheet('explosion', 'sprites/explosion.png', {
+            frameWidth: 47,
+            frameHeight: 50
         })
 
         // map        
@@ -94,6 +106,44 @@ class Load extends Phaser.Scene {
                 15, 16, 16, 16, 16
             ]})
         })
+        this.anims.create({
+            key: 'player-kick',
+            frameRate: 12,
+            frames: this.anims.generateFrameNumbers('player', { frames: [
+                18, 19, 20, 20, 20
+            ]})
+        })
+        this.anims.create({
+            key: 'player-throw',
+            frameRate: 20,
+            frames: this.anims.generateFrameNumbers('player', { frames: [
+                21, 22, 23, 23, 23, 23, 23, 23, 23, 23
+            ]})
+        })
+
+        this.anims.create({
+            key: 'bee-walk',
+            frameRate:6,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('bee', { frames: [
+                1, 0, 2 
+            ]})        
+        })
+        this.anims.create({
+            key: 'bee-idle',
+            frameRate:1,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('bee', { frames: [
+                0
+            ]})        
+        })
+
+        this.anims.create({
+            key: 'bomb-lit',
+            frameRate: 12,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('bomb', {start: 0, end: 2})
+        })
 
         this.anims.create({
             key: 'sunshine',
@@ -107,6 +157,20 @@ class Load extends Phaser.Scene {
             frameRate:4,
             repeat: -1,
             frames: this.anims.generateFrameNumbers('fire', {start: 0, end: 1})
+        })
+
+        this.anims.create({
+            key: 'explosion-start',
+            frameRate:6,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 2})
+        })
+
+        this.anims.create({
+            key: 'explosion-end',
+            frameRate:6,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('explosion', {start: 3, end: 5})
         })
 
         // go to Title scene
