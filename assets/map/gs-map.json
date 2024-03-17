@@ -381,7 +381,7 @@
                 {
                  "height":0,
                  "id":1,
-                 "name":"playerSpawn1",
+                 "name":"playerSpawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -585,7 +585,7 @@
                 {
                  "height":0,
                  "id":20,
-                 "name":"playerSpawn",
+                 "name":"playerSpawnTest",
                  "point":true,
                  "rotation":0,
                  "type":"",
