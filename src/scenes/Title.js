@@ -25,7 +25,7 @@ class Title extends Phaser.Scene {
         
         this.bgm = this.sound.add('bgm', { 
             mute: false,
-            volume: 0.3,
+            volume: 0.05,
             rate: 1.5,
             loop: true 
         });
