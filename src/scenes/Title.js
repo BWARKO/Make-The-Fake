@@ -3,7 +3,7 @@ class Title extends Phaser.Scene {
         super('titleScene')
 
         // CNSTS
-        this.CREDITS = 'SOUNDS: FREESOUND.ORG\n\nFONT: PHASER DOCUMENTATION\n\nOTHER: BLAKE WARKENTON'
+        this.CREDITS = 'INSPO: ADVENTURE TIME(S2 E16)\n\nSOUNDS: FREESOUND.ORG\n\nFONT: PHASER DOCUMENTATION\n\nEVERYTHING ELSE: BLAKE WARKENTON'
     }
 
     create() {
@@ -17,8 +17,8 @@ class Title extends Phaser.Scene {
         this.playScene
         
         this.background = this.add.rectangle(0,0,w,h, 0x000000).setScale(5)
-        this.titleImage = this.add.image(w/2, h/2, 'title').setScale(6)
-        this.pressText = this.add.bitmapText(w/2, h-50, 'gem', `PRESS SPACE`, 60).setOrigin(0.5).setTint(0x00FF00).setAlpha(0)
+        this.titleImage = this.add.image(w/2, h/2, 'title').setScale(6,8)
+        this.pressText = this.add.bitmapText(this.titleImage.width*6-20, this.titleImage.height*8-20, 'gem', `PRESS SPACE`, 40).setOrigin(1).setTint(0x00FF00).setAlpha(0)
 
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
@@ -74,14 +74,14 @@ class Title extends Phaser.Scene {
                 this.creditsTitle = this.add.bitmapText(w/2, h/6, 'gem', 'CREDITS', 120).setOrigin(0.5).setTint(0x00FF00)
                 this.creditsText = this.add.bitmapText(w/2, h*7/12, 'gem', this.CREDITS, 60).setOrigin(0.5).setTint(0x00FF00)
 
-                this.timer = this.time.delayedCall(3000, () => {
+                this.timer = this.time.delayedCall(5000, () => {
                     this.creditsTitle.destroy()
                     this.creditsText.destroy()
 
                     this.controlsTitle = this.add.bitmapText(w/2, h/6, 'gem', 'CONTROLS', 120).setOrigin(0.5).setTint(0x00FF00)
                     this.controlsText = this.add.bitmapText(w/2, h*7/12, 'gem', 'E - KICK\n\nQ - THROW BOMB\n\nSPACE - JUMP\n\nWASD/ARROWS - MOVE\n\n', 60).setOrigin(0.5).setTint(0x00FF00)
 
-                    this.timer = this.time.delayedCall(6000, () => {  
+                    this.timer = this.time.delayedCall(5000, () => {  
                         this.controlsTitle.destroy()
                         this.controlsText.destroy()
                         this.escText.destroy()
