@@ -67,6 +67,8 @@ class Honey extends Phaser.Physics.Arcade.Sprite {
 
         this.body.destroy()
 
+        this.scene.pingSFX.setLoop(true)
+        this.scene.pingSFX.play()
         this.anims.play('explosion-start')
         this.scoreText = this.scene.add.bitmapText(this.x, this.y, 'gem', this.score, 70).setOrigin(0.5).setTint(0x00FF00)
 
@@ -76,6 +78,7 @@ class Honey extends Phaser.Physics.Arcade.Sprite {
             this.scene.time.delayedCall(500, () => {
                 score += this.score
 
+                this.scene.pingSFX.setLoop(false)
                 this.scoreText.destroy()
                 this.destroy()
             }, null, this); 

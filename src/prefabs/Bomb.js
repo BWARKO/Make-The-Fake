@@ -35,10 +35,13 @@ class Bomb extends Phaser.Physics.Arcade.Sprite {
 
     explosion() {
         this.timer.remove()
-
         this.body.destroy()
 
         this.anims.play('coin-explosion')
+        if(!this.scene.blastSFX.isPlaying) {
+            this.scene.blastSFX.play()
+
+        }
         this.scene.time.delayedCall(500, () => {
             this.destroy()
         }, null, this); 

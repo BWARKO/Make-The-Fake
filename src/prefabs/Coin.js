@@ -19,14 +19,17 @@ class Coin extends Phaser.Physics.Arcade.Sprite {
 
     pickup() {
         this.body.destroy()
-        this.scene.coinAmount += 1
 
         this.anims.play('coin-pickup')
+        this.scene.pingSFX.setLoop(false)
+        this.scene.pingSFX.setRate(2.5)
+        this.scene.pingSFX.play()
+
         this.scene.time.delayedCall(250, () => {
             this.anims.play('coin-explosion')
             this.scene.time.delayedCall(500, () => {
                 score += this.score
-                
+
                 this.destroy()
             }, null, this); 
         }, null, this); 

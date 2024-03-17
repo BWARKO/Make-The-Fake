@@ -13,6 +13,8 @@ class Title extends Phaser.Scene {
 
         this.fade = false
         this.transitioning = false
+
+        this.playScene
         
         this.background = this.add.rectangle(0,0,w,h, 0x000000).setScale(5)
         this.titleImage = this.add.image(w/2, h/2, 'title').setScale(6)
@@ -57,6 +59,7 @@ class Title extends Phaser.Scene {
 
             this.bgm.stop()
             this.scene.launch('playScene')
+            this.playScene = this.scene.get('playScene')
             this.scene.bringToTop(this)
 
             this.transitioning = true
@@ -76,7 +79,7 @@ class Title extends Phaser.Scene {
                     this.creditsText.destroy()
 
                     this.controlsTitle = this.add.bitmapText(w/2, h/6, 'gem', 'CONTROLS', 120).setOrigin(0.5).setTint(0x00FF00)
-                    this.controlsText = this.add.bitmapText(w/2, h*7/12, 'gem', 'E - KICK\n\nQ - THROW BOMB\n\nUSE ARROWS AND SPACE TO MOVE\n\n', 60).setOrigin(0.5).setTint(0x00FF00)
+                    this.controlsText = this.add.bitmapText(w/2, h*7/12, 'gem', 'E - KICK\n\nQ - THROW BOMB\n\nSPACE - JUMP\n\nWASD/ARROWS - MOVE\n\n', 60).setOrigin(0.5).setTint(0x00FF00)
 
                     this.timer = this.time.delayedCall(6000, () => {  
                         this.controlsTitle.destroy()
@@ -95,12 +98,16 @@ class Title extends Phaser.Scene {
             this.background.alpha -= 0.01
 
             if (this.background.alpha  <= 0) {
+                this.playScene.player.canMove = true
                 this.scene.stop(this)
             }
-        }
-
-        if (this.transitioning && Phaser.Input.Keyboard.JustDown(escKey)) {
+        } else if (this.transitioning && Phaser.Input.Keyboard.JustDown(escKey)) {
+            this.playScene.player.canMove = true
             this.scene.stop(this)
+        } else if (this.playScene) {
+            if (this.playScene.player) {
+                this.playScene.player.canMove = false
+            }
         }
     }
 }

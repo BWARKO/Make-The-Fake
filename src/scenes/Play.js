@@ -136,9 +136,11 @@ class Play extends Phaser.Scene {
             coin.pickup()
         })
         this.physics.add.collider(this.player, this.fires, () => {
+            this.blastSFX.play()
             this.gameover = true
         })
         this.physics.add.collider(this.player, this.bee, () => {
+            this.blastSFX.play()
             if (this.player.anims.currentAnim.key === 'player-kick') {
                 this.bee.death()
             } else {
@@ -146,6 +148,7 @@ class Play extends Phaser.Scene {
             }
         })
         this.physics.add.collider(this.player, this.honey, () => {
+            this.blastSFX.play()
             if (this.player.anims.currentAnim.key === 'player-kick') {
                 this.honey.death()
             } else {
@@ -158,11 +161,11 @@ class Play extends Phaser.Scene {
         })
         this.physics.add.collider(this.player, this.projectiles, (p, projectile) => {
             projectile.body.destroy()
-
+            this.blastSFX.play()
             projectile.anims.play('coin-explosion')
+
             this.time.delayedCall(500, () => {
                 projectile.destroy()
-
             }, null, this); 
 
             if (this.player.anims.currentAnim.key !== 'player-kick') {
@@ -275,6 +278,19 @@ class Play extends Phaser.Scene {
             loop: true 
         });
         this.bgm.play()
+
+        this.blastSFX = this.sound.add('blast', { 
+            mute: false,
+            volume: 1,
+            rate: 1,
+            loop: false 
+        });
+        this.pingSFX = this.sound.add('ping', { 
+            mute: false,
+            volume: 0.25,
+            rate: 1.25,
+            loop: true 
+        });
     }
 
     update() {

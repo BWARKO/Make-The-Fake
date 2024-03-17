@@ -27,7 +27,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.stepSFX = scene.sound.add('walk', { 
             mute: false,
-            volume: 0.5,
+            volume: 0.2,
             rate: 0.5, 
         });
 
@@ -121,7 +121,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         // play step
-        if (this.step && this.jump && !this.stepSFX.isPlaying && this.anims.currentAnim.key !== 'player-throw') {
+        if (!this.scene.gameover && this.step && this.jump && !this.stepSFX.isPlaying && this.anims.currentAnim.key !== 'player-throw') {
             this.stepSFX.play()
         } 
     }
