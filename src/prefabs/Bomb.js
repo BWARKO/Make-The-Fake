@@ -19,11 +19,6 @@ class Bomb extends Phaser.Physics.Arcade.Sprite {
         this.anims.play('bomb-lit')
     }
 
-    update() {
-        this.x = this.scene.player.x
-        this.y = this.scene.player.y-100
-    }
-
     throw(direction) {
         this.setDamping(true)
         this.setDragX(0.5)
@@ -39,14 +34,13 @@ class Bomb extends Phaser.Physics.Arcade.Sprite {
     }
 
     explosion() {
-        this.timer.destroy()
+        this.timer.remove()
 
-        this.setScale(2)
         this.body.destroy()
 
-        this.anims.play('explosion-end')
+        this.anims.play('coin-explosion')
         this.scene.time.delayedCall(500, () => {
-            this.destroy
+            this.destroy()
         }, null, this); 
     }
 }

@@ -12,12 +12,24 @@ class Bee extends Phaser.Physics.Arcade.Sprite {
         // settings
         this.setScale(5)
         this.setOrigin(0.5)
-        this.body.setSize(45, 37)
+        this.body.setSize(45, 30)
+        this.body.setOffset(2, 5)
         this.body.setGravityY(1500)
         this.body.setImmovable()
     }
 
+    attack() {
+        this.scene.timer = this.scene.time.delayedCall(2000, () => {
+            this.body.setVelocityX(-200)
+            this.anims.play('bee-walk')
+
+        }, null, this); 
+    }
+
     death() {
+        if (this.scene.timer) {
+            this.scene.timer.remove()
+        }
         this.body.destroy()
 
         this.anims.play('explosion-start')
@@ -28,7 +40,7 @@ class Bee extends Phaser.Physics.Arcade.Sprite {
 
             this.scene.time.delayedCall(500, () => {
                 this.scoreText.destroy()
-                this.destroy
+                this.destroy()
 
             }, null, this); 
         }, null, this); 

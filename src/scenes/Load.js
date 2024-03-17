@@ -26,6 +26,14 @@ class Load extends Phaser.Scene {
             frameWidth: 49,
             frameHeight: 37
         })
+        this.load.spritesheet('honeybee', 'sprites/honeybee.png', {
+            frameWidth: 39,
+            frameHeight: 48
+        })
+        this.load.spritesheet('frog', 'sprites/frog.png', {
+            frameWidth: 53,
+            frameHeight: 27
+        })
         this.load.spritesheet('bomb', 'sprites/bomb.png', {
             frameWidth: 17,
             frameHeight: 27
@@ -41,6 +49,14 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('explosion', 'sprites/explosion.png', {
             frameWidth: 47,
             frameHeight: 50
+        })
+        this.load.spritesheet('coin', 'sprites/coin.png', {
+            frameWidth: 11,
+            frameHeight: 18
+        })
+        this.load.spritesheet('drip', 'sprites/drip.png', {
+            frameWidth: 49,
+            frameHeight: 100
         })
 
         // map        
@@ -139,6 +155,43 @@ class Load extends Phaser.Scene {
         })
 
         this.anims.create({
+            key: 'honey-build',
+            frameRate:3,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('honeybee', {start: 1, end: 10})       
+        })
+        this.anims.create({
+            key: 'honey-mouth',
+            frameRate:3,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('honeybee', { frames: [
+                10, 11, 10
+            ]}) 
+        })
+        this.anims.create({
+            key: 'honey-projectile',
+            frameRate:0,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('drip', { frames: [
+                1
+            ]}) 
+        })
+
+        this.anims.create({
+            key: 'frog-eat',
+            frameRate:22,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('frog', {start: 0, end: 10})       
+        })
+        this.anims.create({
+            key: 'frog-poop',
+            frameRate:12,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('frog', { frames: [
+                11, 12, 13, 14, 14, 14, 14, 14, 14, 15, 16
+            ]})         })
+
+        this.anims.create({
             key: 'bomb-lit',
             frameRate: 12,
             repeat: -1,
@@ -171,6 +224,26 @@ class Load extends Phaser.Scene {
             frameRate:6,
             repeat: 0,
             frames: this.anims.generateFrameNumbers('explosion', {start: 3, end: 5})
+        })
+
+        this.anims.create({
+            key: 'coin-pickup',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('coin', {start: 0, end: 1})
+        })
+
+        this.anims.create({
+            key: 'coin-explosion',
+            frameRate: 8,
+            repeat: 0,
+            frames: this.anims.generateFrameNumbers('coin', {start: 2, end: 5})
+        })
+        this.anims.create({
+            key: 'dripping',
+            frameRate: 8,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers('drip', {start: 1, end: 5})
         })
 
         // go to Title scene

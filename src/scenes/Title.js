@@ -4,7 +4,6 @@ class Title extends Phaser.Scene {
     }
 
     create() {
-        console.log('Title Screen')
         this.add.image(w/2, h/2, 'title').setScale(6)
         this.pressText = this.add.bitmapText(w - PADDING * 1.5, h - PADDING, 'gem', `PRESS SPACE`, 40).setOrigin(1).setTint(0x00FF00).setAlpha(0)
 

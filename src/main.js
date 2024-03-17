@@ -35,6 +35,11 @@ let w = game.config.width
 let h = game.config.height
 let PADDING = 10
 
+let gameWon = false
+let lives 
+let score
+let bombs
+
 let cursors
 let spaceKey
 let escKey

@@ -8,9 +8,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.canMove = true
         this.step = false
         this.jump = false
+        this.kick = false
         this.lastDir = 1
-
-        this.bombs = 1
 
         this.scene = scene
 
@@ -23,7 +22,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setGravityY(1500)
         this.setDamping(true)
         this.setDragX(0.0001)
-        this.setMaxVelocity(500)
+        this.setMaxVelocity(500, 400)
         this.body.setCollideWorldBounds(true)
 
         this.stepSFX = scene.sound.add('walk', { 
@@ -81,13 +80,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         // attack
-        if (attackKey.isDown && this.canMove && this.jump) {
+        if (attackKey.isDown && this.canMove && this.kick) {
             this.body.velocity.y -= this.VELOCITY
             this.body.velocity.x += this.VELOCITY/2
             this.anims.play('player-kick')
+
+            this.kick = false
         } 
 
-        if (throwKey.isDown && this.bombs && this.anims.currentAnim.key !== 'player-throw' && this.canMove) {
+        if (throwKey.isDown && bombs && this.anims.currentAnim.key !== 'player-throw' && this.jump && this.canMove) {
             if (this.lastDir == -1) {
                 this.setFlipX(true)
             } 
@@ -103,7 +104,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 }, null, this); 
             }, null, this); 
 
-            this.bombs -= 1
+            bombs -= 1
         }
 
         if (this.anims.currentAnim.key === 'player-throw') {
