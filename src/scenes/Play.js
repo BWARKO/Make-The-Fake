@@ -4,11 +4,14 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        // game settings
-        gameWon = false
-        lives = 3
+        // insure no lasting UI or sound
+        this.scene.stop('uiScene')
+        this.sound.stopAll()
+
+        // reset scene vars
         score = 0
         bombs = 1
+        this.gameover = false
 
         // var(s)
         this.timer
@@ -87,7 +90,7 @@ class Play extends Phaser.Scene {
         this.fires = this.physics.add.group([this.fire1, this.fire2, this.fire3, this.fire4, this.fire5, this.fire6, this.fire7])
 
         this.bee = new Bee(this, beeSpawn.x, beeSpawn.y, 'bee')
-        this.honey = new Honey(this, dripSpawn.x, dripSpawn.y, 'honeybee')
+        this.honey = new Honey(this, dripSpawn.x, dripSpawn.y + 100, 'honeybee')
         this.frog = new Frog(this, frogSpawn.x, frogSpawn.y, 'frog')
 
         this.drip = this.add.sprite(dripSpawn.x, dripSpawn.y, 'drip').setScale(5).setOrigin(0.5)
@@ -108,12 +111,15 @@ class Play extends Phaser.Scene {
             // add map layer(s)
         const groundLayer = map.createLayer('ground', tileset)
 
+        // create UI
+        this.scene.launch('uiScene')
+
         // layers collide
         groundLayer.setCollisionByProperty({collides: true})
 
         // update camera
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels - 800)
-        this.cameras.main.startFollow(this.player, true, 0.1, 0.1).setFollowOffset(0, 150)
+        this.cameras.main.startFollow(this.player, true, 0.1, 0.1).setFollowOffset(0, 250)
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
 
         // colliders
@@ -146,11 +152,11 @@ class Play extends Phaser.Scene {
                 this.gameover = true
             }
         })
-        this.physics.add.overlap(this.player, this.bombs, (p, bomb) => {
+        this.physics.add.collider(this.player, this.bombs, (p, bomb) => {
             bomb.explosion()
             this.gameover = true
         })
-        this.physics.add.overlap(this.player, this.projectiles, (p, projectile) => {
+        this.physics.add.collider(this.player, this.projectiles, (p, projectile) => {
             projectile.body.destroy()
 
             projectile.anims.play('coin-explosion')
@@ -171,7 +177,7 @@ class Play extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.bee, groundLayer)
-        this.physics.add.collider(this.bee, this.bombs, (bee, bomb) => {
+        this.physics.add.overlap(this.bee, this.bombs, (bee, bomb) => {
             bee.death()
             bomb.explosion()
 
@@ -180,7 +186,7 @@ class Play extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.honey, groundLayer)
-        this.physics.add.collider(this.honey, this.bombs, (bee, bomb) => {
+        this.physics.add.overlap(this.honey, this.bombs, (bee, bomb) => {
             this.honey.death()
             bomb.explosion()
 
@@ -189,7 +195,7 @@ class Play extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.frog, groundLayer)
-        this.physics.add.collider(this.frog, this.bombs, (frog, bomb) => {
+        this.physics.add.overlap(this.frog, this.bombs, (frog, bomb) => {
             this.frog.death()
             bomb.explosion()
 
@@ -238,6 +244,11 @@ class Play extends Phaser.Scene {
             this.player.canMove = false
             this.frogTrigger.destroy()
 
+            this.scene.stop('uiScene')
+            this.cameras.main.startFollow(this.frog)
+            this.cameras.main.setZoom(2)
+            this.cameras.main.setFollowOffset(0)
+
             this.frog.attack()
         })
 
@@ -247,8 +258,6 @@ class Play extends Phaser.Scene {
             this.physics.world.drawDebug = this.physics.world.drawDebug ? false : true
             this.physics.world.debugGraphic.clear()
         }, this)
-
-        this.gameover = false
 
         cursors = this.input.keyboard.createCursorKeys()
         attackKey = this.input.keyboard.addKey('E')
@@ -270,18 +279,17 @@ class Play extends Phaser.Scene {
         // check for gameover
         if (this.gameover) {
             this.player.setAlpha(0)
-            this.player.body.moves = false
-            this.bgm.stop()
+            this.player.body.destroy()
             this.time.delayedCall(1750, () => {
-                if(!this.lives) {
+                if(!lives) {
                     this.scene.start('gameoverScene')
                 } else {
-                    this.scene.restart()
+                    this.scene.restart()                   
+                    lives -= 1
                 }
             }, null, this); 
         } else if (gameWon) {
             this.time.delayedCall(1750, () => {
-                this.bgm.stop()
                 this.scene.start('gameoverScene')
 
             }, null, this);
@@ -291,7 +299,7 @@ class Play extends Phaser.Scene {
         if (this.player.x > this.honeyTrigger.x) {
             this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels - 300)
         } else {
-            this.cameras.main.setBounds(0, 0,this.map.widthInPixels, this.map.heightInPixels - 800)
+            this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels - 800)
         }
 
     }

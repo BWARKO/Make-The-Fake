@@ -4,8 +4,12 @@ class Title extends Phaser.Scene {
     }
 
     create() {
+        // insure no lasting UI or sound
+        this.scene.stop('uiScene')
+        this.sound.stopAll()
+        
         this.add.image(w/2, h/2, 'title').setScale(6)
-        this.pressText = this.add.bitmapText(w - PADDING * 1.5, h - PADDING, 'gem', `PRESS SPACE`, 40).setOrigin(1).setTint(0x00FF00).setAlpha(0)
+        this.pressText = this.add.bitmapText(w/2, h-50, 'gem', `PRESS SPACE`, 60).setOrigin(0.5).setTint(0x00FF00).setAlpha(0)
 
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
         escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)

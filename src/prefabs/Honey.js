@@ -4,19 +4,16 @@ class Honey extends Phaser.Physics.Arcade.Sprite {
 
         // add to scene/engine
         scene.add.existing(this)
-        scene.physics.add.existing(this)
 
         // vars
+        this.score = 800
+
         this.scene = scene
         this.initX = x
         this.initY = y
 
-        // settings
-        this.setScale(5)
-        this.setOrigin(0.5)
-        this.body.setGravityY(1500)
-        this.body.setImmovable()
-        this.body.setSize(this.width-4, this.height-4)
+        // settings in build honey cant be killed till it starts forming
+        
     }
 
     attack() {
@@ -34,9 +31,17 @@ class Honey extends Phaser.Physics.Arcade.Sprite {
     }
 
     build () {
-        this.dripping = this.scene.add.sprite(this.initX, this.initY, 'drip').setScale(5).setOrigin(0.5)
+        this.dripping = this.scene.add.sprite(this.initX, this.initY - 100, 'drip').setScale(5).setOrigin(0.5)
         this.dripping.anims.play('dripping')
         this.anims.play('honey-build')
+
+        // settings
+        this.scene.physics.add.existing(this)
+        this.setScale(5)
+        this.setOrigin(0.5)
+        this.body.setGravityY(1500)
+        this.body.setImmovable()
+        this.body.setSize(this.width-4, this.height-4)
 
         this.scene.timer = this.scene.time.delayedCall(3000, () => {
             this.dripping.destroy()
@@ -64,12 +69,14 @@ class Honey extends Phaser.Physics.Arcade.Sprite {
         this.body.destroy()
 
         this.anims.play('explosion-start')
-        this.scoreText = this.scene.add.bitmapText(this.x, this.y, 'gem', `800`, 70).setOrigin(0.5).setTint(0x00FF00)
+        this.scoreText = this.scene.add.bitmapText(this.x, this.y, 'gem', this.score, 70).setOrigin(0.5).setTint(0x00FF00)
 
         this.scene.time.delayedCall(1000, () => {
             this.anims.play('explosion-end')
 
             this.scene.time.delayedCall(500, () => {
+                score += this.score
+
                 this.scoreText.destroy()
                 this.destroy()
             }, null, this); 

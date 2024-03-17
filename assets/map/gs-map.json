@@ -381,7 +381,7 @@
                 {
                  "height":0,
                  "id":1,
-                 "name":"playerSpawn",
+                 "name":"playerSpawn1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -591,8 +591,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":12187.1977919174,
-                 "y":1248.9401141946
+                 "x":12170.5594697479,
+                 "y":1299.80057945366
                 }, 
                 {
                  "height":0,

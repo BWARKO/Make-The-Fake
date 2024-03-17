@@ -7,6 +7,8 @@ class Coin extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this)
 
         // var
+        this.score = 10
+
         this.scene = scene
 
         // settings
@@ -23,6 +25,8 @@ class Coin extends Phaser.Physics.Arcade.Sprite {
         this.scene.time.delayedCall(250, () => {
             this.anims.play('coin-explosion')
             this.scene.time.delayedCall(500, () => {
+                score += this.score
+                
                 this.destroy()
             }, null, this); 
         }, null, this); 

@@ -3,6 +3,8 @@ class Frog extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame)
 
         //vars
+        this.score = 1000
+
         this.scene = scene
 
         // add to scene/engine
@@ -26,6 +28,7 @@ class Frog extends Phaser.Physics.Arcade.Sprite {
                 this.scene.player.setAlpha(0)
 
                 this.scene.timer = this.scene.time.delayedCall(500, () => {
+                    lives = 0
                     this.scene.timer = this.scene.time.delayedCall(1000, () => {
                         this.poop = this.scene.add.sprite(this.x + 65, this.y, 'frog').setScale(5).setOrigin(0.5)
                         this.poop.anims.play('frog-poop')
@@ -44,12 +47,14 @@ class Frog extends Phaser.Physics.Arcade.Sprite {
         this.body.destroy()
 
         this.anims.play('explosion-start')
-        this.scoreText = this.scene.add.bitmapText(this.x, this.y, 'gem', `1000`, 70).setOrigin(0.5).setTint(0x00FF00)
+        this.scoreText = this.scene.add.bitmapText(this.x, this.y, 'gem', this.score, 70).setOrigin(0.5).setTint(0x00FF00)
 
         this.scene.time.delayedCall(1000, () => {
             this.anims.play('explosion-end')
 
             this.scene.time.delayedCall(500, () => {
+                score += this.score
+
                 this.scoreText.destroy()
                 this.destroy
 

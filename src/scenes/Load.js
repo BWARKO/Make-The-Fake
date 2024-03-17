@@ -17,6 +17,11 @@ class Load extends Phaser.Scene {
         this.load.path = './assets/'
         // load graphics assets
         this.load.image('title', 'sprites/title.png')
+        this.load.image('bg', 'sprites/background.png')
+        this.load.image('bomba', 'sprites/bomba.png')
+        this.load.image('life', 'sprites/life.png')
+
+
 
         this.load.spritesheet('player', 'sprites/playerAtlas.png', {
             frameWidth: 18,
@@ -62,8 +67,6 @@ class Load extends Phaser.Scene {
         // map        
         this.load.image('tilesetImage', 'map/gs-tilemap.png')
         this.load.tilemapTiledJSON('tilemapJSON', 'map/gs-map.json')
-
-        this.load.image('bg', 'sprites/background.png')
 
         // load audio assets
         this.load.audio('bgm', 'audios/bgm.wav')

@@ -15,7 +15,7 @@ let config = {
         pixelArt: true
     },
     width: 1200,
-    height: 600,
+    height: 800,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
@@ -25,7 +25,7 @@ let config = {
             debug: true
         }
     },
-    scene: [ Load, Title, Play, Gameover ]
+    scene: [ Load, Title, Play, UI, Gameover ]
 }
 
 const game = new Phaser.Game(config)
@@ -36,9 +36,9 @@ let h = game.config.height
 let PADDING = 10
 
 let gameWon = false
-let lives 
-let score
-let bombs
+let lives = 3
+let score = 0
+let bombs = 1
 
 let cursors
 let spaceKey
