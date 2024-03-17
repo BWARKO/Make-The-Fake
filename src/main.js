@@ -41,6 +41,10 @@ let score = 0
 let bombs = 1
 
 let cursors
+let wKey
+let aKey
+let sKey
+let dKey
 let spaceKey
 let escKey
 let attackKey

@@ -8,6 +8,7 @@ class Play extends Phaser.Scene {
         this.scene.stop('uiScene')
         this.sound.stopAll()
 
+
         // reset scene vars
         score = 0
         bombs = 1
@@ -127,7 +128,6 @@ class Play extends Phaser.Scene {
             // player
         this.physics.add.collider(this.player, groundLayer, () => {
             if (this.player.body.blocked.down && !this.player.jump) {
-                this.player.stepSFX.play()
                 this.player.jump = true
                 this.player.kick = true
             } 
@@ -254,14 +254,19 @@ class Play extends Phaser.Scene {
 
 
         this.physics.world.drawDebug = false
-        this.input.keyboard.on('keydown-D', function() {
+        this.input.keyboard.on('keydown-PLUS', function() {
             this.physics.world.drawDebug = this.physics.world.drawDebug ? false : true
             this.physics.world.debugGraphic.clear()
         }, this)
 
         cursors = this.input.keyboard.createCursorKeys()
+        wKey = this.input.keyboard.addKey('W')
+        aKey = this.input.keyboard.addKey('A')
+        sKey = this.input.keyboard.addKey('S')
+        dKey = this.input.keyboard.addKey('D')
+
         attackKey = this.input.keyboard.addKey('E')
-        throwKey = this.input.keyboard.addKey('R')
+        throwKey = this.input.keyboard.addKey('Q')
 
         this.bgm = this.sound.add('bgm', { 
             mute: false,

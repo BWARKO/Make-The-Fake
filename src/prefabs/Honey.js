@@ -47,9 +47,8 @@ class Honey extends Phaser.Physics.Arcade.Sprite {
             this.dripping.destroy()
             this.anims.play('honey-mouth')
 
-            this.attack()
             this.scene.timer = this.scene.time.addEvent({
-                delay: 4000,                
+                delay: 1500,                
                 callback: () => {
                 this.attack()
                 },

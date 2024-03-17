@@ -41,7 +41,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         // movement
-        if (cursors.left.isDown && this.canMove) {
+        if ((cursors.left.isDown || aKey.isDown) && this.canMove) {
             this.lastDir = -1
             this.body.velocity.x = -this.VELOCITY
             this.step = true
@@ -49,7 +49,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             if ((this.anims.currentAnim.key !== 'player-left' && this.anims.currentAnim.key !== 'player-kick' && this.anims.currentAnim.key !== 'player-throw') && this.jump || !this.anims.isPlaying) {
                 this.anims.play('player-left')
             }
-        } else if (cursors.right.isDown && this.canMove) {
+        } else if ((cursors.right.isDown || dKey.isDown) && this.canMove) {
             this.lastDir = 1
             this.body.velocity.x = this.VELOCITY
             this.step = true
@@ -64,7 +64,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.step = false
         }
         
-        if ((cursors.up.isDown || cursors.space.isDown) && this.jump && this.canMove) {
+        if ((cursors.up.isDown || cursors.space.isDown || wKey.isDown) && this.jump && this.canMove) {
             this.stepSFX.play()
             this.body.velocity.y -= this.VELOCITY*2
             this.jump = false

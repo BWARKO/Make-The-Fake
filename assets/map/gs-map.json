@@ -381,7 +381,7 @@
                 {
                  "height":0,
                  "id":1,
-                 "name":"playerSpawn",
+                 "name":"playerSpawn1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -585,14 +585,14 @@
                 {
                  "height":0,
                  "id":20,
-                 "name":"playerSpawnTest",
+                 "name":"playerSpawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":12170.5594697479,
-                 "y":1299.80057945366
+                 "x":8967.6042328944,
+                 "y":795.671939731801
                 }, 
                 {
                  "height":0,
@@ -659,8 +659,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":103.758,
-                 "x":6206.98624822695,
+                 "width":19.2120450150078,
+                 "x":6256.73749200804,
                  "y":468.477413317573
                 }, 
                 {

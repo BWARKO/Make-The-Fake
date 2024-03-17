@@ -1,14 +1,21 @@
 class Title extends Phaser.Scene {
     constructor() {
         super('titleScene')
+
+        // CNSTS
+        this.CREDITS = 'SOUNDS: FREESOUND.ORG\n\nFONT: PHASER DOCUMENTATION\n\nOTHER: BLAKE WARKENTON'
     }
 
     create() {
         // insure no lasting UI or sound
         this.scene.stop('uiScene')
         this.sound.stopAll()
+
+        this.fade = false
+        this.transitioning = false
         
-        this.add.image(w/2, h/2, 'title').setScale(6)
+        this.background = this.add.rectangle(0,0,w,h, 0x000000).setScale(5)
+        this.titleImage = this.add.image(w/2, h/2, 'title').setScale(6)
         this.pressText = this.add.bitmapText(w/2, h-50, 'gem', `PRESS SPACE`, 60).setOrigin(0.5).setTint(0x00FF00).setAlpha(0)
 
         spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
@@ -45,9 +52,55 @@ class Title extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(spaceKey)) {
+        if (Phaser.Input.Keyboard.JustDown(spaceKey) && !this.transitioning) {
+            this.timer.remove()
+
             this.bgm.stop()
-            this.scene.start('playScene')
+            this.scene.launch('playScene')
+            this.scene.bringToTop(this)
+
+            this.transitioning = true
+
+            this.titleImage.destroy()
+            this.pressText.destroy()
+            
+            this.timer = this.time.delayedCall(750, () => {
+                this.escText = this.add.bitmapText(w-50, h-50, 'gem', `ESC TO SKIP`, 40).setTint(0x00FF00).setOrigin(1)
+
+
+                this.creditsTitle = this.add.bitmapText(w/2, h/6, 'gem', 'CREDITS', 120).setOrigin(0.5).setTint(0x00FF00)
+                this.creditsText = this.add.bitmapText(w/2, h*7/12, 'gem', this.CREDITS, 60).setOrigin(0.5).setTint(0x00FF00)
+
+                this.timer = this.time.delayedCall(3000, () => {
+                    this.creditsTitle.destroy()
+                    this.creditsText.destroy()
+
+                    this.controlsTitle = this.add.bitmapText(w/2, h/6, 'gem', 'CONTROLS', 120).setOrigin(0.5).setTint(0x00FF00)
+                    this.controlsText = this.add.bitmapText(w/2, h*7/12, 'gem', 'E - KICK\n\nQ - THROW BOMB\n\nUSE ARROWS AND SPACE TO MOVE\n\n', 60).setOrigin(0.5).setTint(0x00FF00)
+
+                    this.timer = this.time.delayedCall(6000, () => {  
+                        this.controlsTitle.destroy()
+                        this.controlsText.destroy()
+                        this.escText.destroy()
+
+                        this.levelText = this.add.bitmapText(w/2, h/2, 'gem', 'LEVEL - 1', 60).setOrigin(0.5).setTint(0x00FF00)
+                        this.fade = true           
+                    }, null, this);
+                }, null, this); 
+            }, null, this); 
+        }
+
+        if (this.fade) {
+           
+            this.background.alpha -= 0.01
+
+            if (this.background.alpha  <= 0) {
+                this.scene.stop(this)
+            }
+        }
+
+        if (this.transitioning && Phaser.Input.Keyboard.JustDown(escKey)) {
+            this.scene.stop(this)
         }
     }
 }

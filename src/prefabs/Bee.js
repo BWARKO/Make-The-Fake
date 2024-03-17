@@ -21,7 +21,7 @@ class Bee extends Phaser.Physics.Arcade.Sprite {
     }
 
     attack() {
-        this.scene.timer = this.scene.time.delayedCall(2000, () => {
+        this.scene.timer = this.scene.time.delayedCall(1000, () => {
             this.body.setVelocityX(-200)
             this.anims.play('bee-walk')
 
