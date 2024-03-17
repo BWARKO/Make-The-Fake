@@ -247,7 +247,7 @@ class Play extends Phaser.Scene {
             this.scene.stop('uiScene')
             this.cameras.main.startFollow(this.frog)
             this.cameras.main.setZoom(2)
-            this.cameras.main.setFollowOffset(0)
+            this.cameras.main.setFollowOffset(0, 50)
 
             this.frog.attack()
         })
