@@ -377,7 +377,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="spawn">
-  <object id="1" name="playerSpawn1" x="485.068" y="594.277">
+  <object id="1" name="playerSpawn" x="485.068" y="594.277">
    <point/>
   </object>
   <object id="2" name="fireSpawn1" x="2646.57" y="973.758">
@@ -428,7 +428,7 @@
   <object id="19" name="dripSpawn" x="9407.25" y="627.717">
    <point/>
   </object>
-  <object id="20" name="playerSpawn" x="8967.6" y="795.672">
+  <object id="20" name="playerSpawnTest" x="8967.6" y="795.672">
    <point/>
   </object>
   <object id="24" name="fireSpawn6" x="12040.3" y="1452.66">
