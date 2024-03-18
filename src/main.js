@@ -10,6 +10,7 @@
 // https://freesound.org/people/BloodPixelHero/sounds/580898/
 
 let config = {
+    parent: 'phaser-game',
     type: Phaser.AUTO,
     render: {
         pixelArt: true

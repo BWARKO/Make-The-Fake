@@ -3,7 +3,7 @@ class Title extends Phaser.Scene {
         super('titleScene')
 
         // CNSTS
-        this.CREDITS = 'INSPO: ADVENTURE TIME(S2 E16)\n\nSOUND: FREESOUND.ORG\n\nFONT: NATHAN ALTICE(but actually phaser)\n\nEVERYTHING ELSE: BLAKE WARKENTON'
+        this.CREDITS = 'INSPO: ADVENTURE TIME S2 E16\n        (HIDDEN LINK BELOW)\n\nSOUND: FREESOUND.ORG\n\nFONT: NATHAN ALTICE(but actually phaser)\n\nEVERYTHING ELSE: BLAKE WARKENTON'
         this.CONTROLS = 'E - KICK\n\nQ - THROW BOMB\n\nSPACE - JUMP\n\nWASD/ARROWS - MOVE\n\n'
     }
 
